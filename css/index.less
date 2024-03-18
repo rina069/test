@@ -1,0 +1,316 @@
+body {
+    // 设置页面最大和最小宽度，保证页面内容
+    min-width: 320px;
+    max-width: 750px;
+    margin: 0 auto;
+    // 先给个高度，查看排版等下删去
+    height: 2200px;
+    background-color: #F2F4F7;
+}
+
+// 约束：当屏幕大于750px时，html字体大小不变
+@media screen and (min-width:750px) {
+    html {
+        // 这份js文件中的默认设定份数为20
+        // 为了确保权重加了！important
+        font-size: 37.5px !important;
+    }
+}
+
+a {
+    text-decoration: none;
+    // 让所有a链接的颜色都变成该色
+    color: #707070;
+}
+
+.wrap {
+    background-color:
+        #fff;
+}
+
+.header {
+    height: 2.1333rem;
+    border-bottom: .0267rem solid #EAEAEA;
+    text-align: center;
+    line-height: 2.1333rem;
+    font-style: .9333rem;
+    color: #1C1C1C;
+}
+
+// nav部分
+// nav部分布局思路总结：
+// 1.nav用flex布局
+// 2.items使用33.33%进行多行排列
+// 3.img和span居中对齐
+// nav部分距离调节部分总结：
+// 1.nav给上下内边距挤开
+// 2.item前三个给下外边距
+
+// 关于文字和图片水平居中方案：
+// 1.文字水平居中text-align：center
+// 2.图片水平居中margin：auto；
+// 3.flex布局给其父级添加 display: flex;
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    // 用nav大盒子给padding值挤开
+    padding: 1.2rem 0 1.6rem 0;
+
+    .item {
+        flex: 33.33333%;
+        // background-color: pink;
+        // 文字居中
+        // text-align: center;
+        // 纵向显示
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        img {
+            // 图片和块元素使用margin：0 auto；居中对齐
+            // margin: 0 auto;
+            width: 3.7067rem;
+            height: 3.7067rem;
+        }
+
+        span {
+            font-size: .6667rem;
+            color: #707070;
+        }
+
+        // 结构伪类选择器
+        // item中的前三个有下外边距
+        &:nth-child(-n+3) {
+            margin-bottom: 1.84rem;
+        }
+
+    }
+}
+
+// 修改padding的边距
+.go {
+    padding: 0 .48rem 1.1467rem;
+}
+
+// content部分
+// content位置调整思路
+// 1.使用padding将上下左右挤开
+// 2.使用margin将上下盒子挤开（尽量上下盒子margin只使用一个）
+
+// con-hd部分布局思路
+// 1.使用flex布局
+// 2.使用justify-content调整左右位置
+// 3.h4中的文字和图片对不起问题，vertical-align写在图片外的盒子icon上，不是写在图片上
+// 4.图片外的icon是行内标签，转成行内块才会显示大小
+
+.content {
+    padding: 1.0667rem .5867rem;
+    background-color: #fff;
+    margin-top: .2667rem;
+
+    .con-hd {
+        height: 1.0133rem;
+        // background-color: pink;
+        display: flex;
+        justify-content: space-between;
+        line-height: 1.0133rem;
+        // 让con-hd部分和轮播图有段距离
+        margin-bottom: .9067rem;
+
+        h4 {
+            // h4默认是有margin值的，需要先删去
+            // 出现问题先检查
+            margin: 0;
+            font-size: .7467rem;
+            color: #333333;
+
+            // 用伪元素before插入图片
+            // display: flex;
+            // &::before {
+            //     content: '';
+            //     width: .9867rem;
+            //     height: .9867rem;
+            //     background: url(../icons/i1.png) no-repeat;
+            //     background-size: .9867rem .9867rem;
+            // }
+
+            // 用img插入图片
+
+            // ！！写在图片父级盒子上，不是写在外面的盒子
+            // 文字和图片没有在一条直线上问题
+            // text-align: center;
+            // vertical-align: middle;
+            .icon {
+                // span是行内元素给高度是没用的
+                // 使用inline-block使得文字和图片可以在一行内显示
+                display: inline-block;
+                width: 1.0133rem;
+                height: 1.0133rem;
+                // border-right-color: skyblue;
+                // 尽量不要超过3层
+                // 图片跟文字没对齐问题，vertical-align: middle;是需要写在图片外部的盒子上的
+                vertical-align: middle;
+            }
+
+        }
+
+        .more {
+            font-size: .5867rem;
+            color: #999999;
+        }
+    }
+}
+
+// 就业指导模块轮播图
+.get_job_focus {
+
+    // 在swiper.css中两个箭头是绝对定位
+    // 根据需求，把两个箭头拿出来
+    position: relative;
+
+    // 引入demo的css样式
+    .swiper-container {
+        // width: 100%;
+        height: 100%;
+        // 根据需求把宽度定位540px
+        width: 17.0667rem;
+
+    }
+
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        // 使用flex布局默认为主轴开始部分显示
+        flex-direction: column;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+        transition: 300ms;
+        // 其余的是0.8
+        transform: scale(0.8);
+        // opacity是让盒子透明
+        opacity: .4;
+
+        a {
+            width: 9.0133rem;
+            height: 10.0267rem;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        p {
+            // p修改到同宽就不会掉到第二行去（可能和js有关，但暂时没学过）
+            width: 9.0133rem;
+            font-size: .6667rem;
+            margin-top: .64rem;
+            color: #333333;
+
+        }
+    }
+
+    // 中间最前面这个是scale(1)，其余是scale(0.8).当前选中的那个
+    .swiper-slide-active,
+    .swiper-slide-duplicate-active {
+        transform: scale(1);
+        // 不要让最前面的那个被旁边压住
+        z-index: 999;
+        // opacity是让盒子透明
+        opacity: 1;
+    }
+}
+
+// 学习模块轮播图(不能选一样的会有冲突)
+// 该部分回头再学
+// .study {
+
+//     .swiper {
+//         width: 100%;
+//         height: 100%;
+//     }
+
+//     .swiper-slide {
+//         width: 7.7333rem;
+//         height: 9.0667rem;
+//         background-color: pink;
+//         text-align: center;
+//         font-size: 18px;
+//         background: #fff;
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//     }
+
+//     .swiper-slide img {
+//         display: block;
+//         width: 100%;
+//         height: 100%;
+//         object-fit: cover;
+//     }
+// }
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+    height: 3.0133rem;
+    width: 20rem;
+    // background-color: skyblue;
+    background-color: #fff;
+    display: flex;
+    // 会被别人压住
+    z-index: 999;
+    // 还有外边框和上边框
+    padding-top: .5333rem;
+    border-top: .0267rem solid #E2E2E2;
+
+    a {
+        flex: 1;
+        // background-color: pink;
+        display: flex;
+        flex-direction: column;
+        // 先主轴再侧轴居中
+        // justify-content: center;
+        align-items: center;
+        font-size: .5867rem;
+
+
+        span {
+
+            width: 1.04rem;
+            height: 1.0933rem;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        p {
+            font-size: .5867rem;
+            margin-top: .2933rem;
+            color: #666666;
+
+            &:first-child {
+                color: #52C4F0
+            }
+        }
+    }
+
+
+}
